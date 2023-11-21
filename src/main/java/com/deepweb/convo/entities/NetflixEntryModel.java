@@ -3,7 +3,6 @@ package com.deepweb.convo.entities;
 import com.deepweb.convo.constants.DurationUnit;
 import com.deepweb.convo.constants.RecordType;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class NetflixEntryModel {
     private Long id;
     private String showId;

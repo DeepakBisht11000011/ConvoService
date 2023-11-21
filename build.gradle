@@ -16,9 +16,11 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	annotationProcessor 'org.projectlombok:lombok'
 	compileOnly 'org.projectlombok:lombok'
-	implementation 'com.opencsv:opencsv'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.opencsv:opencsv:5.8'
+	testImplementation group: 'org.slf4j', name: 'slf4j-reload4j', version: '2.0.9'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
