@@ -40,17 +40,20 @@ public class NetflixRecordConverterService implements RecordConverterService {
             entryModel.setListedIn(getListedInList(values[10]));
             entryModel.setDescription(values[11]);
         } catch (Exception exp) {
-            throw new ConvoRecordConversionException(exp.getMessage(),exp);
+            throw new ConvoRecordConversionException(exp.getMessage(), exp);
         }
         return true;
     }
 
     private DurationModel getDurationModel(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
         DurationModel durationModel = null;
         if (durationModel == null) {
             String[] duration = value.trim().split(" ");
             durationModel = new DurationModel();
-            Long durationMode = Long.parseLong(duration[0]);
+            Long durationMode = Long.parseLong(duration[0].trim());
 
             durationModel.setDuration(durationMode);
             if (duration[1].trim().toLowerCase().contains(DurationUnit.MIN.getLabel().toLowerCase())) {
@@ -77,7 +80,6 @@ public class NetflixRecordConverterService implements RecordConverterService {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             return simpleDateFormat.parse(value);
         } catch (ParseException exp) {
-
             return null;
         }
     }
@@ -127,8 +129,12 @@ public class NetflixRecordConverterService implements RecordConverterService {
         if (user == null) {
             user = new UserModel();
             String[] names = value.split(" ", 2);
-            user.setFirstName(names[0]);
-            user.setLastName(names[1]);
+            if (!names[0].isBlank()) {
+                user.setFirstName(names[0]);
+            }
+            if (names.length > 1 && !names[1].isBlank()) {
+                user.setLastName(names[1]);
+            }
             user.setUserType(userType);
         }
         return user;
