@@ -1,6 +1,7 @@
 package com.deepweb.convo.service.impl;
 
 import com.deepweb.convo.exception.ConvoFileImportException;
+import com.deepweb.convo.repository.NetflixEntryRepository;
 import com.deepweb.convo.service.ImportFile;
 import com.deepweb.convo.service.RecordConverterService;
 import com.opencsv.CSVReader;
@@ -26,6 +27,8 @@ public class CsvFileImporter implements ImportFile {
     private ResourceLoader resourceLoader;
     @Autowired
     private RecordConverterService netflixRecordConverterService;
+    @Autowired
+    NetflixEntryRepository netflixRepo;
 
     @Override
     public boolean importFile() throws ConvoFileImportException {
@@ -33,6 +36,7 @@ public class CsvFileImporter implements ImportFile {
 //        firstWayOfReading();
         try {
             secondWayOfReading();
+            System.out.println(netflixRepo.findById(8807L));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException | CsvException e) {

@@ -4,13 +4,19 @@ import com.deepweb.convo.constants.DurationUnit;
 import com.deepweb.convo.constants.RecordType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
 
 @Getter
+@ToString
 @Setter
+@Document("netflixentry")
 public class NetflixEntryModel {
+    @Id
     private Long id;
     private String showId;
     private RecordType type;

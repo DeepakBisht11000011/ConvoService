@@ -5,7 +5,9 @@ import com.deepweb.convo.constants.RecordType;
 import com.deepweb.convo.constants.UserType;
 import com.deepweb.convo.entities.*;
 import com.deepweb.convo.exception.ConvoRecordConversionException;
+import com.deepweb.convo.repository.NetflixEntryRepository;
 import com.deepweb.convo.service.RecordConverterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -17,6 +19,9 @@ import java.util.List;
 
 @Service
 public class NetflixRecordConverterService implements RecordConverterService {
+
+    @Autowired
+    NetflixEntryRepository netflixrepo;
     @Override
     public boolean convert(String[] values) throws ConvoRecordConversionException {
         if (values.length == 0) {
@@ -39,6 +44,7 @@ public class NetflixRecordConverterService implements RecordConverterService {
             entryModel.setDurationM(getDurationModel(values[9]));
             entryModel.setListedIn(getListedInList(values[10]));
             entryModel.setDescription(values[11]);
+            netflixrepo.save(entryModel);
         } catch (Exception exp) {
             throw new ConvoRecordConversionException(exp.getMessage(), exp);
         }
