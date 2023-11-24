@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 @Getter
-@ToString
 @Setter
+@ToString
 @Document("netflixentry")
 public class NetflixEntryModel {
     @Id

@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @ToString
-
 public class GenreModel {
 
     private Long id;
