@@ -23,8 +23,6 @@ public class NetflixServiceImpl implements NetflixService {
     @Autowired
     private NetflixEntryRepository netflixEntryRepo;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     public List<NetflixEntryModel> findAllRecordsPaginated(int pageNo){
 
@@ -36,7 +34,6 @@ public class NetflixServiceImpl implements NetflixService {
     @Override
     public List<NetflixEntryModel> findByGenre(String genreStr,int pageNo) {
         Pageable pageable = PageRequest.of(pageNo,20);
-        //Criteria c =Criteria.where("listedIn").elemMatch(Criteria.where("name").regex(genreStr);
         Page<NetflixEntryModel> page = netflixEntryRepo.findByListedIn(genreStr,pageable);
         return page.toList();
     }
