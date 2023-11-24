@@ -21,4 +21,9 @@ public class NetflixController {
     public ResponseEntity<List<NetflixEntryModel>> getAll(@RequestParam final Integer pageNo){
         return ResponseEntity.ok(netflixService.findAllRecordsPaginated(pageNo));
     }
+
+    @GetMapping("/findByGenre")
+    public ResponseEntity<List<NetflixEntryModel>> findByGenre(@RequestParam final String gener,@RequestParam Integer pageNo){
+        return ResponseEntity.ok(netflixService.findByGenre(gener,pageNo));
+    }
 }

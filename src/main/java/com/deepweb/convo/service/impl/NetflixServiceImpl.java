@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +23,21 @@ public class NetflixServiceImpl implements NetflixService {
     @Autowired
     private NetflixEntryRepository netflixEntryRepo;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     public List<NetflixEntryModel> findAllRecordsPaginated(int pageNo){
 
         Pageable pageable = PageRequest.of(pageNo, 20);
         Page<NetflixEntryModel> page = netflixEntryRepo.findAll(pageable);
+        return page.toList();
+    }
+
+    @Override
+    public List<NetflixEntryModel> findByGenre(String genreStr,int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo,20);
+        //Criteria c =Criteria.where("listedIn").elemMatch(Criteria.where("name").regex(genreStr);
+        Page<NetflixEntryModel> page = netflixEntryRepo.findByListedIn(genreStr,pageable);
         return page.toList();
     }
 }
