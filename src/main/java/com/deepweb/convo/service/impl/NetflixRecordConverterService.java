@@ -106,10 +106,13 @@ public class NetflixRecordConverterService implements RecordConverterService {
     }
 
     private GenreModel getGenre(String value) {
+        if(value == null) {
+            return null;
+        }
         GenreModel genreModel = null;
         if (genreModel == null) {
             genreModel = new GenreModel();
-            genreModel.setName(value);
+            genreModel.setName(value.trim());
         }
         return genreModel;
     }
@@ -130,11 +133,14 @@ public class NetflixRecordConverterService implements RecordConverterService {
     }
 
     private UserModel getSingleUser(String value, UserType userType) {
+        if(value == null){
+            return null;
+        }
         UserModel user = null;
         //getUser from DB.
         if (user == null) {
             user = new UserModel();
-            String[] names = value.split(" ", 2);
+            String[] names = value.trim().split(" ", 2);
             if (!names[0].isBlank()) {
                 user.setFirstName(names[0]);
             }
@@ -153,7 +159,7 @@ public class NetflixRecordConverterService implements RecordConverterService {
         } else {
             List<CountryModel> countries = new ArrayList<>();
             if (value.contains(",")) {
-                String[] countryArray = value.split(",");
+                String[] countryArray = value.trim().split(",");
                 countries.addAll(Arrays.stream(countryArray).map(this::getSingleCountry).toList());
             } else {
                 countries.add(getSingleCountry(value));
