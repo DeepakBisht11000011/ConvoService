@@ -18,12 +18,17 @@ public class NetflixController {
     private NetflixService netflixService;
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<NetflixEntryModel>> getAll(@RequestParam final Integer pageNo){
+    public ResponseEntity<List<NetflixEntryModel>> getAll(@RequestParam final Integer pageNo) {
         return ResponseEntity.ok(netflixService.findAllRecordsPaginated(pageNo));
     }
 
     @GetMapping("/findByGenre")
-    public ResponseEntity<List<NetflixEntryModel>> findByGenre(@RequestParam final String gener,@RequestParam Integer pageNo){
-        return ResponseEntity.ok(netflixService.findByGenre(gener,pageNo));
+    public ResponseEntity<List<NetflixEntryModel>> findByGenre(@RequestParam final String gener, @RequestParam Integer pageNo) {
+        return ResponseEntity.ok(netflixService.findByGenre(gener, pageNo));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<NetflixEntryModel>> search(@RequestParam final String param1, @RequestParam final String param2, @RequestParam Integer pageNo) {
+        return ResponseEntity.ok(netflixService.search(param1, param2, pageNo));
     }
 }
