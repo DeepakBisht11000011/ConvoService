@@ -32,7 +32,7 @@ public class NetflixRecordConverterService implements RecordConverterService {
             String showId = values[0].trim().substring(1);
             long id = Long.parseLong(showId);
             entryModel.setId(id);
-            entryModel.setShowId(showId);
+            entryModel.setShowId(values[0].trim());
             entryModel.setType(getRecordType(values[1]));
             entryModel.setTitle(values[2].trim());
             entryModel.setDirector(getUsers(values[3], UserType.DIRECTOR));
